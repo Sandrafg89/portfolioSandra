@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="reset.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Portfolio Sandra</title>
+    <script src="jquery-3.1.0.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        $(function() {
+            AOS.init();
+            var timer_textWrittenCharacter = new timer();
+            textWritten(["creativa", "proactiva", "agile"], "title-rotate");
+            
+            $("a.navigation-section").on('click',function(e) {
+                var url = e.target.href;
+                var hash = url.substring(url.indexOf("#")+1);
+                $('html, body').animate({
+                    scrollTop: $('#'+hash).offset().top
+                }, 500);
+                return false;
+            });
+            function timer()
+            {
+                var timer = {
+                    running: false,
+                    iv: 0,
+                    timeout: false,
+                    cb : function(){},
+                    start : function(cb,iv,sd){
+                        var elm = this;
+                        clearInterval(this.timeout);
+                        this.running = true;
+                        if(cb) this.cb = cb;
+                        if(iv) this.iv = iv;
+                        if(sd) elm.execute(elm);
+                        this.timeout = setTimeout(function(){elm.execute(elm)}, this.iv);
+                    },
+                    execute : function(e){
+                        if(!e.running) return false;
+                        e.cb();
+                        e.start();
+                    },
+                    stop : function(){
+                        this.running = false;
+                    },
+                    set_interval : function(iv){
+                        clearInterval(this.timeout);
+                        this.start(false, iv);
+                    }
+                };
+                return timer;
+            }
+    
+            function textWritten(words, id) {
+                var letterCount = 1;
+                var x = 1;
+                var waiting = false;
+                var target = document.getElementById(id)
+                timer_textWrittenCharacter.set_interval(120);
+    
+                timer_textWrittenCharacter.start(function(){
+                    if (letterCount === 0 && waiting === false) {
+                        waiting = true;
+                        target.innerHTML = words[0].substring(0, letterCount)
+                        window.setTimeout(function() {
+                            var usedWord = words.shift();
+                            words.push(usedWord);
+                            x = 1;
+                            letterCount += x;
+                            waiting = false;
+                        }, 1000)
+                    } else if (letterCount === words[0].length + 1 && waiting === false) {
+                        waiting = true;
+                        window.setTimeout(function() {
+                            x = -1;
+                            letterCount += x;
+                            waiting = false;
+                        }, 1000)
+                    } else if (waiting === false) {
+                        timer_textWrittenCharacter.set_interval(0);
+                        target.innerHTML = words[0].substring(0, letterCount)
+                        letterCount += x;
+                    }
+                }, 120, false);
+    
+                timer_textWrittenCharacter.start();
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <nav>
+        <div class="menu" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
+            <ul class="logo">
+                &nbsp;
+            </ul>
+            <ul class="menu-links">
+                <li><a class="navigation-section" href="#sobreMi">Sobre mí</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="inicio">
+            <div class="title">Hola soy Sandra, una diseñadora UX/UI </span><span id="title-rotate"></span>
+        </div>
+       <div data-aos="fade-up" data-aos-duration="3000">
+            <div class="paragraphs1">
+                <div id="parentimg1" class="content-box-claro">
+                    <img id="img1" src="fotos/Mascotas-Mockup.jpg" alt="Huertify"></img>
+                    <div data-aos="fade-up" data-aos-duration="3000" class="aos-init titulo-trabajo-izq">
+                        <h2>Animal</h2>
+                    </div>
+                </div>
+                <div class="content-box-text">
+                    <div class="descripcion-trabajo1">
+                        <p>Animal surge con la necesidad de llevar el control de tus mascotas, desde las fechas de vacunación hasta las citas de tus veterinarios.</p>
+                        <p>Además permite una comunicación bidireccional entre veterinario y cliente a través de un sistema de reserva de cita.</p>
+                    </div>
+                    <a href="https://medium.com/@sandrafg.89/animal-case-study-da30e84b1937">Leer más</a>
+                </div>
+            </div>
+        </div>
+        <div data-aos="fade-up" data-aos-duration="3000">
+            <div class="paragraphs2"> 
+                <div class="content-box-oscuro">
+                    <img src="fotos/tension-Mockup.jpg" alt="DiTension">
+                    <div data-aos="fade-up" data-aos-duration="3000" class="aos-init titulo-trabajo-der">
+                        <h2>DiTensión</h2>
+                    </div>
+                </div>
+                <div class="content-box-text">
+                    <div class="descripcion-trabajo2">
+                        <p>Este proyecto de wellness, DiTensión, se desarrolla para ayudar a las personas que sufren de hipertensión, ya sea para llevar un control de sus niveles, mantener una dieta acorde con su problemática e incluso para sentirse motivados a la hora de adquirir nievos hábitos. </p>
+                        <p>Gracias a esta app, conseguirás restablecer tu tensión con unos niveles normales.</p>
+                    </div>
+                    <a href="https://medium.com/@sandrafg.89/ditensi%C3%B3n-app-wellness-97bd4ee13908">Leer más</a>
+                </div>
+            </div>
+        </div>
+        <div  data-aos="fade-up" data-aos-duration="3000">  
+            <div class="paragraphs3">
+                <div class="content-box-claro">
+                    <img src="fotos/huertify-Mockup.jpg" alt="Huertify">
+                    <div data-aos="fade-up" data-aos-duration="3000" class="aos-init titulo-trabajo-izq">
+                        <h2>Huertify</h2>
+                    </div>
+                </div>
+                <div class="content-box-text">
+                    <div class="descripcion-trabajo3">
+                        <p>Se ha estandarizado el consumo a través de grandes superficies, pero actualmente está surgiendo nuevas tendencias en el consumidor. Valoramos más los productos ecológicos y sobre todo los productos locales, pero su búsqueda puede resultar complicada.</p>
+                        <p>Por este motivo, Huertify acerca los consumidores a los productores locales. Los usuarios podrán comprar a través de la app, y los productores podrán controlar su producción y ventas a través de un dashboard.</p>
+                    </div>
+                    <a href="https://medium.com/@sandrafg.89/huertify-case-study-308db41e9f2c">Leer más</a>
+                </div>
+            </div>
+        </div>
+        <div data-aos="fade-up" data-aos-duration="3000">
+            <div class="paragraphs2"> 
+                <div class="content-box-oscuro">
+                    <img src="fotos/vinted-Mockup.jpg" alt="Vinted">
+                    <div data-aos="fade-up" data-aos-duration="3000" class="aos-init titulo-trabajo-der">
+                        <h2>Vinted</h2>
+                    </div>
+                </div>
+                <div class="content-box-text">
+                    <div class="descripcion-trabajo2">
+                        <p>Todos conocemos Vinted, lugar donde vender la ropa que ya no queremos y donde poder ampliar nuestro armario con ropa de segunda mano. </p>
+                        <p>En este proyecto realizamos un rediseño de la app, en la que renovamos la estética, mejoramos la accesibilidad y creamos nuevas funcionalidades, como es en el caso del probador virtual. Pese a todos los cambios, mantuvimos los colores y la estructura para convervar una coherencia con la app original.</p>
+                    </div>
+                    <a href="https://medium.com/@sandrafg.89/redise%C3%B1o-de-vinted-a596949f77a4">Leer más</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="sobreMi">
+            <h1>Sobre mí</h1>
+            <p>¡Hola! Soy Sandra, diseñadora UX/UI gracias a un apasionante bootcamp en Ironhack que ha cambiado mi forma de entender la experiencia de usuario y me ha permitido trabajar de primera mano, con grandes expertos del sector que me han hecho crecer como profesional.</p>
+            <p>Estudié el Grado de Historia del Arte, Letras y Humanidades, junto con su correspondiente Máster en Investigación, lo que me permitió, desarrollar habilidades tan importantes como la constancia, el sacrificio, el esfuerzo y las ganas por descubrir cosas nuevas.</p>
+            <p>Más tarde, con el objetivo de seguir formándome y embarcarme en nuevos proyectos, me decidí a realizar el Ciclo Formativo de Grado Superior de Gráfica Publicitaria y así poder acercarme a lo que realmente me gustaba, dar soluciones creativas a los problemas cotidianos en el ámbito del diseño.</p>
+            <p>Durante algo más de dos años tuve la oportunidad de trabajar en una empresa realizando diseños de logotipos, murales, rótulos, vallas publicitarias, y en la que aprendí a tener un enfoque realista y personalizado de cada uno de los clientes con los que trabajaba e intentando encontrar un equilibrio entre soluciones eficientes y creativas.</p>
+            <p>Me considero una persona empática, sociable y con capacidad de adaptación. Me gusta compartir conocimiento con los equipos con los que trabajo. Siempre intento crear un buen ambiente en el que trabajo y ser una buena compañera.</p>
+        </div>
+    </main>
+    <footer>
+        <div class="footer">
+            <div class="correo">
+                <a id="square" href="mailto:sandrafg.89@gmail.com">sandrafg.89@gmail.com</a>
+            </div>
+            <div class="redes">
+                <a id="square" href="https://medium.com/@sandrafg.89">Medium · </a>
+                <a id="square" href="https://www.linkedin.com/in/sandrafgutierrez/"> LinkedIn </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
